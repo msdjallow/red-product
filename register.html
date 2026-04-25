@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED PRODUCT - Inscription</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>body { background-color: #494C4F; }</style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md">
+        <div class="flex items-center justify-center gap-2 mb-8 text-white text-2xl font-bold uppercase"><i class="fa-solid fa-hotel"></i> RED PRODUCT</div>
+        <div class="bg-white rounded-lg shadow-2xl p-10">
+            <h2 class="text-gray-800 text-lg font-medium mb-10">Inscrivez-vous en tant que Admin</h2>
+            <form id="registerForm" class="space-y-8">
+                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">Nom</label>
+                    <input type="text" id="regName" required class="w-full py-1 outline-none text-gray-700" placeholder="Votre nom complet">
+                </div>
+                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">E-mail</label>
+                    <input type="email" required class="w-full py-1 outline-none text-gray-700" placeholder="Votre e-mail">
+                </div>
+                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">Mot de passe</label>
+                    <input type="password" required class="w-full py-1 outline-none text-gray-700" placeholder="Mot de passe">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" required id="terms" class="accent-[#494C4F]">
+                    <label for="terms" class="text-sm text-gray-600">Accepter les termes et la politique</label>
+                </div>
+                <button type="submit" class="w-full bg-[#494C4F] text-white py-3 rounded-md font-bold hover:bg-black transition">S'inscrire</button>
+            </form>
+        </div>
+        <div class="text-center mt-6">
+            <p class="text-white">Déjà un compte? <a href="login.html" class="text-yellow-500 font-bold hover:underline">Se connecter</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registerForm').onsubmit = (e) => {
+            e.preventDefault();
+            const typedName = document.getElementById('regName').value;
+            localStorage.setItem('currentUser', typedName);
+            window.location.href = "login.html";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED PRODUCT - Connexion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>body { background-color: #494C4F; }</style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md">
+        <div class="flex items-center justify-center gap-2 mb-8 text-white text-2xl font-bold uppercase"><i class="fa-solid fa-hotel"></i> RED PRODUCT</div>
+        <div class="bg-white rounded-lg shadow-2xl p-10">
+            <h2 class="text-gray-800 text-lg font-medium mb-10">Connectez-vous en tant que Admin</h2>
+            <form id="loginForm" class="space-y-8">
+                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">E-mail</label>
+                    <input type="email" id="email" required class="w-full py-1 outline-none text-gray-700 placeholder-gray-300 bg-transparent" placeholder="Votre e-mail">
+                </div>
+                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">Mot de passe</label>
+                    <input type="password" required class="w-full py-1 outline-none text-gray-700 placeholder-gray-300 bg-transparent" placeholder="Votre mot de passe">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="remember" class="accent-[#494C4F]">
+                    <label for="remember" class="text-sm text-gray-600">Gardez-moi connecté</label>
+                </div>
+                <button type="submit" class="w-full bg-[#494C4F] text-white py-3 rounded-md font-bold hover:bg-black transition">Se connecter</button>
+            </form>
+        </div>
+        <div class="text-center mt-6 space-y-2">
+            <a href="forgot-password.html" class="block text-yellow-500 font-bold hover:underline">Mot de passe oublié?</a>
+            <p class="text-white">Vous n'avez pas de compte? <a href="register.html" class="text-yellow-500 font-bold hover:underline">S'inscrire</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            // On simule ton nom pour l'exemple, ou on récupère l'email
+            localStorage.setItem('currentUser', "Mahamadou Abdoulaye Diallo");
+            window.location.href = "index.html";
+        };
+    </script>
+</body>
+</html>
