@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-[#F8F9FA] flex min-h-screen font-sans">
+<body class="bg-[#F8F9FA] flex min-h-screen font-sans relative">
 
-    <aside class="w-64 bg-[#494C4F] text-white flex flex-col justify-between sticky top-0 h-screen shadow-xl">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#494C4F] text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out shadow-xl flex flex-col justify-between">
         <div>
             <div class="p-6 text-xl font-bold flex items-center gap-2 border-b border-gray-600/50 uppercase italic tracking-tighter">
                 <i class="fa-solid fa-hotel text-white"></i> RED PRODUCT
@@ -27,57 +27,67 @@
         
         <div class="p-6 border-t border-gray-600 flex items-center gap-3">
             <div class="relative">
-                <img src="https://ui-avatars.com/api/?name=User" id="sidebarAvatar" class="w-10 h-10 rounded-full border-2 border-green-500">
+                <img src="" id="sidebarAvatar" class="w-10 h-10 rounded-full border-2 border-green-500">
                 <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#494C4F] rounded-full"></span>
             </div>
             <div class="overflow-hidden">
-                <p id="sidebarName" class="text-sm font-bold truncate">Chargement...</p>
-                <p class="text-[10px] text-green-400 font-bold">● en ligne</p>
+                <p id="sidebarName" class="text-sm font-bold truncate italic">Diallo M. S.</p>
+                <p class="text-[10px] text-green-400 font-bold uppercase">● en ligne</p>
             </div>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-screen">
-        <header class="bg-white h-16 border-b px-8 flex items-center justify-between shrink-0">
-            <h1 class="text-lg font-bold text-gray-700 uppercase">Liste des hôtels</h1>
-            <div class="flex items-center gap-6">
-                <div class="relative">
-                    <input type="text" placeholder="Recherche" class="pl-10 pr-4 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm outline-none w-64 focus:ring-2 focus:ring-gray-100">
+    <div class="flex-1 flex flex-col min-w-0">
+        
+        <header class="bg-white h-16 border-b px-4 lg:px-8 flex items-center justify-between shrink-0 shadow-sm">
+            <div class="flex items-center">
+                <button id="toggleSidebar" class="lg:hidden text-gray-600 text-xl mr-4 p-2 hover:bg-gray-100 rounded-lg">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="text-lg font-bold text-gray-700 uppercase truncate">Liste des hôtels</h1>
+            </div>
+            
+            <div class="flex items-center gap-3 lg:gap-6">
+                <div class="relative hidden sm:block">
+                    <input type="text" placeholder="Recherche" class="pl-10 pr-4 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm outline-none w-48 lg:w-64 focus:ring-2 focus:ring-gray-100">
                     <i class="fa-solid fa-search absolute left-4 top-2.5 text-gray-400 text-xs"></i>
                 </div>
-                <div class="flex items-center gap-4 border-l pl-6">
+                <div class="flex items-center gap-3 lg:gap-4 border-l pl-4 lg:pl-6">
                     <div class="relative cursor-pointer">
                         <i class="fa-regular fa-bell text-gray-600 text-xl"></i>
                         <span class="absolute -top-1.5 -right-1.5 bg-yellow-400 text-[9px] px-1 rounded-full text-white font-bold border border-white">3</span>
                     </div>
-                    <img src="https://ui-avatars.com/api/?name=User" id="headerAvatar" class="w-8 h-8 rounded-full border shadow-sm">
+                    <img src="" id="headerAvatar" class="w-8 h-8 rounded-full border shadow-sm">
                     <i class="fa-solid fa-right-from-bracket text-gray-500 hover:text-red-500 cursor-pointer text-lg" onclick="logout()"></i>
                 </div>
             </div>
         </header>
 
-        <div class="flex-1 overflow-y-auto p-8">
-            <div class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                <h2 class="text-2xl font-normal">Hôtels <span id="hotelCount" class="text-gray-400 ml-2">0</span></h2>
-                <button id="openModal" class="bg-white border border-gray-300 text-gray-700 px-5 py-2 rounded-xl text-sm font-semibold hover:bg-gray-50 flex items-center gap-2 shadow-sm transition-all active:scale-95">
+        <div class="flex-1 overflow-y-auto p-4 lg:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                <div class="flex items-baseline gap-2">
+                    <h2 class="text-2xl font-normal text-gray-800">Hôtels</h2>
+                    <span id="hotelCount" class="text-gray-400 text-xl font-light">0</span>
+                </div>
+                <button id="openModal" class="w-full sm:w-auto bg-white border border-gray-300 text-gray-700 px-5 py-2 rounded-xl text-sm font-semibold hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95">
                     <i class="fa-solid fa-plus text-[10px]"></i> Créer un nouveau hôtel
                 </button>
             </div>
 
-            <div id="hotelGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div id="hotelGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 </div>
         </div>
     </div>
 
     <div id="hotelModal" class="fixed inset-0 bg-black/50 backdrop-blur-[2px] hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in duration-200">
-            <div class="p-6 border-b border-dashed flex items-center gap-4 text-gray-600">
-                <button id="closeModal" class="hover:text-black transition-colors"><i class="fa-solid fa-arrow-left"></i></button>
-                <h3 class="uppercase font-bold text-sm tracking-widest">Créer un nouveau hôtel</h3>
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in duration-200 flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b border-dashed border-gray-200 flex items-center gap-4">
+                <button id="closeModal" class="text-gray-400 hover:text-black transition-colors"><i class="fa-solid fa-arrow-left"></i></button>
+                <h3 class="uppercase font-bold text-sm text-gray-600 tracking-widest">Créer un nouveau hôtel</h3>
             </div>
             
-            <form id="hotelForm" class="p-8">
-                <div class="grid grid-cols-2 gap-6">
+            <form id="hotelForm" class="p-6 lg:p-8 overflow-y-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                     <div>
                         <label class="text-[11px] font-bold text-gray-500 uppercase mb-1 block">Nom de l'hôtel</label>
                         <input type="text" id="hName" required class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-gray-400 outline-none" placeholder="Nom de l'hôtel">
@@ -110,32 +120,44 @@
 
                 <div class="mt-6">
                     <label class="text-[11px] font-bold text-gray-500 uppercase mb-1 block">Ajouter une photo</label>
-                    <div class="border-2 border-dashed border-gray-200 rounded-xl py-10 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-50 transition cursor-pointer">
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl py-10 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-50 transition cursor-pointer relative">
+                        <input type="file" class="absolute inset-0 opacity-0 cursor-pointer">
                         <i class="fa-regular fa-image text-4xl mb-2 opacity-30"></i>
                         <p class="text-sm">Cliquez pour ajouter</p>
                     </div>
                 </div>
 
                 <div class="flex justify-end mt-8">
-                    <button type="submit" class="bg-[#494C4F] text-white px-10 py-2.5 rounded-lg font-bold text-sm hover:bg-black transition-all shadow-lg active:scale-95">Enregistrer</button>
+                    <button type="submit" class="w-full sm:w-auto bg-[#494C4F] text-white px-10 py-2.5 rounded-lg font-bold text-sm hover:bg-black transition-all shadow-lg active:scale-95 uppercase">Enregistrer</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // --- GESTION DU PROFIL ---
+        // --- GESTION SIDEBAR MOBILE ---
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleSidebar');
+        toggleBtn.onclick = () => sidebar.classList.toggle('-translate-x-full');
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && window.innerWidth < 1024) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        // --- IDENTITÉ DYNAMIQUE ---
         const savedUser = localStorage.getItem('currentUser') || "Mahamadou Abdoulaye Diallo";
         document.getElementById('sidebarName').innerText = savedUser;
-        document.getElementById('sidebarAvatar').src = `https://ui-avatars.com/api/?name=${savedUser}&background=random`;
-        document.getElementById('headerAvatar').src = `https://ui-avatars.com/api/?name=${savedUser}&background=random`;
+        const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(savedUser)}&background=random&color=fff`;
+        document.getElementById('sidebarAvatar').src = avatarUrl;
+        document.getElementById('headerAvatar').src = avatarUrl;
 
         function logout() {
             localStorage.removeItem('currentUser');
             window.location.href = "login.html";
         }
 
-        // --- GESTION DES HÔTELS ---
+        // --- LOGIQUE HÔTELS ---
         let hotels = [
             { name: "Hôtel Terrou-Bi", address: "Boulevard Martin Luther King Dakar", price: "25.000", currency: "XOF", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400" },
             { name: "King Fahd Palace", address: "Rte des Almadies, Dakar", price: "20.000", currency: "XOF", img: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400" },
@@ -157,8 +179,8 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
                         <img src="${hotel.img}" class="h-44 w-full object-cover">
                         <div class="p-4">
-                            <p class="text-[10px] text-orange-600 font-bold uppercase mb-1">${hotel.address}</p>
-                            <h3 class="text-lg font-bold text-gray-900">${hotel.name}</h3>
+                            <p class="text-[10px] text-orange-600 font-bold uppercase mb-1 truncate">${hotel.address}</p>
+                            <h3 class="text-lg font-bold text-gray-900 truncate">${hotel.name}</h3>
                             <p class="text-xs text-gray-500 mt-2">${hotel.price} ${hotel.currency} par nuit</p>
                         </div>
                     </div>
