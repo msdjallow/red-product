@@ -3,47 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED PRODUCT - Inscription</title>
+    <title>Inscription - RED Product</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>body { background-color: #494C4F; }</style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md">
-        <div class="flex items-center justify-center gap-2 mb-8 text-white text-2xl font-bold uppercase"><i class="fa-solid fa-hotel"></i> RED PRODUCT</div>
-        <div class="bg-white rounded-lg shadow-2xl p-10">
-            <h2 class="text-gray-800 text-lg font-medium mb-10">Inscrivez-vous en tant que Admin</h2>
-            <form id="registerForm" class="space-y-8">
-                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
-                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">Nom</label>
-                    <input type="text" id="regName" required class="w-full py-1 outline-none text-gray-700" placeholder="Votre nom complet">
-                </div>
-                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
-                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">E-mail</label>
-                    <input type="email" required class="w-full py-1 outline-none text-gray-700" placeholder="Votre e-mail">
-                </div>
-                <div class="border-b border-gray-200 focus-within:border-gray-500 transition-colors">
-                    <label class="text-[11px] font-bold text-gray-400 uppercase block mb-1">Mot de passe</label>
-                    <input type="password" required class="w-full py-1 outline-none text-gray-700" placeholder="Mot de passe">
-                </div>
-                <div class="flex items-center gap-2">
-                    <input type="checkbox" required id="terms" class="accent-[#494C4F]">
-                    <label for="terms" class="text-sm text-gray-600">Accepter les termes et la politique</label>
-                </div>
-                <button type="submit" class="w-full bg-[#494C4F] text-white py-3 rounded-md font-bold hover:bg-black transition">S'inscrire</button>
-            </form>
+<body class="bg-[#414141] flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-10 rounded shadow-2xl w-full max-w-md">
+        <div class="flex items-center justify-center mb-8">
+            <div class="bg-[#414141] p-2 rounded-full mr-2">
+                <span class="text-white font-bold">R</span>
+            </div>
+            <h1 class="text-2xl font-bold text-[#414141]">RED PRODUCT</h1>
         </div>
-        <div class="text-center mt-6">
-            <p class="text-white">Déjà un compte? <a href="login.html" class="text-yellow-500 font-bold hover:underline">Se connecter</a></p>
+
+        <h2 class="text-xl mb-6 text-gray-700 font-semibold">Inscrivez-vous en tant qu'Administrateur</h2>
+        
+        <form id="register-form" class="space-y-4">
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Nom complet</label>
+                <input type="text" id="name" required 
+                    class="w-full px-4 py-2 border-b-2 border-gray-300 focus:border-[#414141] outline-none transition-colors">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">E-mail</label>
+                <input type="email" id="email" required 
+                    class="w-full px-4 py-2 border-b-2 border-gray-300 focus:border-[#414141] outline-none transition-colors">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Mot de passe</label>
+                <input type="password" id="password" required 
+                    class="w-full px-4 py-2 border-b-2 border-gray-300 focus:border-[#414141] outline-none transition-colors">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Confirmer le mot de passe</label>
+                <input type="password" id="confirm-password" required 
+                    class="w-full px-4 py-2 border-b-2 border-gray-300 focus:border-[#414141] outline-none transition-colors">
+            </div>
+            
+            <div class="flex items-center">
+                <input type="checkbox" id="terms" required class="mr-2">
+                <label for="terms" class="text-sm text-gray-600">Accepter les termes et conditions</label>
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-[#414141] text-white py-3 rounded font-semibold hover:bg-black transition-colors">
+                S'inscrire
+            </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+                Vous avez déjà un compte ? <a href="index.html" class="text-yellow-600 font-bold hover:underline">Se connecter</a>
+            </p>
         </div>
     </div>
-    <script>
-        document.getElementById('registerForm').onsubmit = (e) => {
-            e.preventDefault();
-            const typedName = document.getElementById('regName').value;
-            localStorage.setItem('currentUser', typedName);
-            window.location.href = "login.html";
-        };
-    </script>
+
+    <!-- Liaison Scripts -->
+    <script src="config.js"></script>
+    <script src="register.js"></script>
 </body>
 </html>

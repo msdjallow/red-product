@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED Product - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex h-screen overflow-hidden font-sans">
+
+    <aside class="w-64 bg-[#414141] text-white flex flex-col justify-between flex-shrink-0">
+        <div>
+            <div class="p-6 flex items-center space-x-2 border-b border-gray-600 mb-4">
+                <div class="bg-white p-1 rounded-sm text-[#414141] font-bold">R</div>
+                <span class="font-bold tracking-wider">RED PRODUCT</span>
+            </div>
+            <nav>
+                <p class="px-6 py-2 text-xs text-gray-400 uppercase tracking-widest">Principal</p>
+                <a href="#" id="nav-dashboard" onclick="showSection('dashboard')" class="flex items-center px-6 py-3 transition-all duration-200">
+                    <i class="fas fa-th-large mr-3"></i> Dashboard
+                </a>
+                <a href="#" id="nav-hotels" onclick="showSection('hotels')" class="flex items-center px-6 py-3 transition-all duration-200">
+                    <i class="fas fa-hotel mr-3"></i> Liste des hôtels
+                </a>
+            </nav>
+        </div>
+        <div class="p-6 border-t border-gray-600 flex items-center space-x-3 bg-[#333333]">
+            <div class="w-10 h-10 rounded-full bg-green-500 border-2 border-white flex items-center justify-center font-bold text-white uppercase" id="user-initials">
+                U
+            </div>
+            <div class="text-sm text-white">
+                <p id="user-name-side" class="font-bold truncate w-32 italic">Utilisateur</p>
+                <p class="text-xs text-green-400 font-medium flex items-center">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> En ligne
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col overflow-hidden">
+        
+        <header class="bg-white h-16 border-b flex items-center justify-between px-8 z-10 shadow-sm">
+            <h2 id="page-title" class="font-bold text-lg text-gray-800">Dashboard</h2>
+            <div class="flex items-center space-x-6">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400 text-xs"></i>
+                    <input type="text" id="search-input" placeholder="Recherche" class="pl-10 pr-4 py-2 bg-gray-100 rounded-full text-sm outline-none w-64 border border-transparent focus:bg-white focus:border-gray-200 transition-all">
+                </div>
+                <div class="flex items-center space-x-4">
+                    <i class="far fa-bell text-gray-500 relative cursor-pointer hover:text-gray-800">
+                        <span class="absolute -top-1 -right-1 bg-yellow-500 text-[10px] text-white px-1 rounded-full">3</span>
+                    </i>
+                    <div class="w-8 h-8 rounded-full bg-gray-300 border border-gray-100"></div>
+                    <button onclick="logout()" class="p-2 hover:bg-red-50 rounded-full group" title="Déconnexion">
+                        <i class="fas fa-sign-out-alt text-gray-400 group-hover:text-red-500 transition-colors"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8 bg-gray-50">
+            
+            <section id="section-dashboard">
+                <div class="mb-10 animate-in fade-in slide-in-from-left-4 duration-500">
+                    <h2 class="text-3xl font-light text-gray-800">Bienvenue sur RED Product</h2>
+                    <p class="text-gray-500 text-sm mt-1">Aperçu global de votre plateforme de gestion hôtelière.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-purple-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-file-alt text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800" id="stat-forms">125</p><p class="text-gray-400 text-sm">Formulaires</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-green-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-comment-alt text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800" id="stat-messages">45</p><p class="text-gray-400 text-sm">Messages</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-yellow-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-users text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800" id="stat-users">0</p><p class="text-gray-400 text-sm">Utilisateurs</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-red-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-envelope text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800">25</p><p class="text-gray-400 text-sm">E-mails</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-indigo-600 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-hotel text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800" id="stat-hotels-dash">0</p><p class="text-gray-400 text-sm">Hôtels</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center space-x-6 border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="bg-blue-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center"><i class="fas fa-building text-xl"></i></div>
+                        <div><p class="text-3xl font-bold text-gray-800">02</p><p class="text-gray-400 text-sm">Entités</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-hotels" class="hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <h3 class="text-2xl text-gray-700 font-semibold">Hôtels <span id="hotel-count" class="text-gray-300 font-light ml-2">0</span></h3>
+                    <button id="open-modal-btn" class="bg-white border border-gray-300 px-6 py-2 rounded-xl flex items-center hover:bg-gray-100 transition-all shadow-sm font-medium">
+                        <span class="mr-3 text-2xl font-light text-gray-400">+</span> Créer un nouveau hôtel
+                    </button>
+                </div>
+                <div id="hotels-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="hotel-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+            <div class="p-6 border-b flex justify-between items-center bg-gray-50/50">
+                <h3 class="text-lg font-bold text-gray-800 flex items-center uppercase">
+                    <span class="cursor-pointer mr-4 text-gray-400 hover:text-gray-600" onclick="toggleModal()">←</span>
+                    CRÉER UN NOUVEAU HÔTEL
+                </h3>
+            </div>
+            <form id="hotel-form" class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-600">Nom de l'hôtel</label>
+                    <input type="text" id="h-name" required class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                    <label class="block text-sm font-medium text-gray-600">Adresse</label>
+                    <input type="text" id="h-address" required class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                    <label class="block text-sm font-medium text-gray-600">Prix par nuit</label>
+                    <input type="number" id="h-price" required class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                </div>
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-600">E-mail</label>
+                    <input type="email" id="h-email" required class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                    <label class="block text-sm font-medium text-gray-600">Numéro de téléphone</label>
+                    <input type="text" id="h-phone" required class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                    <label class="block text-sm font-medium text-gray-600">Devise</label>
+                    <select id="h-currency" class="w-full border-gray-200 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-gray-100">
+                        <option value="XOF">F CFA (XOF)</option>
+                        <option value="USD">Dollar ($)</option>
+                        <option value="EUR">Euro (€)</option>
+                    </select>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-600 mb-2">URL de l'image</label>
+                    <div class="border-2 border-dashed border-gray-200 rounded-2xl p-4 text-center">
+                        <input type="url" id="h-image" placeholder="https://..." class="w-full text-center outline-none bg-transparent text-sm">
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2 flex justify-end mt-4">
+                    <button type="submit" class="bg-[#414141] text-white px-12 py-3 rounded-xl font-bold hover:bg-black transition-all">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
